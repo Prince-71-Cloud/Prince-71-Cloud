@@ -1,7 +1,7 @@
 ## Hi there 👋
 
 <div align="center">
-    <img src="cover.jpg" alt="Aman's Cybersecurity Banner" />
+    <img src="cover.png" alt="Aman's Cybersecurity Banner" />
 </div>
 
 <h1 align="center"> 👋 Hey there! I'm Md. Aman Bhuiyan </h1>
