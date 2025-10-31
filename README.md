@@ -1,16 +1,70 @@
 ## Hi there 👋
 
-<!--
-**Prince-71-Cloud/Prince-71-Cloud** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<div align="center">
+    <img src="cover.jpg" alt="Aman's Cybersecurity Banner" />
+</div>
 
-Here are some ideas to get you started:
+<h1 align="center"> 👋 Hey there! I'm Md. Aman Bhuiyan </h1>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+<p align="center">
+  <a href="https://github.com/DenverCoder1/readme-typing-svg">
+    <img src="https://readme-typing-svg.herokuapp.com?lines=Cybersecurity+Researcher+%26+Bug+Hunter;Software+Quality+Assurance+Engineer;Automation+%26+Security+Testing+Enthusiast;CTF+Player+|+Innovation+Driven;Exploring+AI+in+Phishing+Detection&center=true&width=600&height=50&color=00FFCC">
+  </a>
+</p>
+
+---
+
+### 🧠 About Me
+Hey! I’m **Aman**, a cybersecurity enthusiast and ethical hacker who loves breaking and securing things responsibly.  
+I’m currently interning as an **SQA Engineer at Softeko**, where I test web apps manually and through automation using **Playwright**.  
+Outside of work, I hunt for vulnerabilities and have responsibly disclosed bugs to **Google, Mozilla, Adobe, and Xfinity** — earning recognition and bounties in their **Halls of Fame**.  
+
+I’m also into **CTF challenges**, **security automation**, and researching **phishing & homoglyph attacks using AI**.
+
+---
+
+### ⚙️ My Tech Arsenal
+- 🕵️‍♂️ **Cybersecurity:** Burp Suite, OWASP ZAP, Nmap, SQLMap, Dirsearch, Nikto  
+- 🧩 **Automation:** Playwright, Selenium, Jenkins, JMeter  
+- 🧠 **AI/ML (Research):** Python, Scikit-learn, TensorFlow, NLP  
+- 🧪 **Testing Tools:** Postman, TestRail, JIRA, GitHub Actions  
+- 💻 **Languages:** Python, Java, JavaScript, Bash  
+
+---
+
+### 🧑‍💻 Bug Bounty & Research Highlights
+- 🏆 Reported **Homoglyph Display Name Bypass** vulnerabilities across multiple platforms.  
+- 🐞 Found logic and OTP bypass vulnerabilities in real-world applications.  
+- 💬 Conducted vulnerability assessments involving **CORS misconfigurations**, **XSS**, and **auth bypasses**.  
+- 🎯 Featured in the **Halls of Fame** of Google, Adobe, Mozilla, and Xfinity.  
+
+---
+
+### 💼 Current Focus
+- 🚀 Advancing in **Automation Testing** and **Security Engineering**  
+- 🤖 Researching **AI-based Phishing & Homoglyph Detection**  
+- 🔍 Building custom tools for **bug bounty automation & recon**  
+
+---
+
+<div align="center">
+  <div>
+    <img src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=Prince-icecream&layout=compact&theme=radical" width="33%"/>
+    <img src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=Prince-icecream&layout=compact&langs_count=10&theme=highcontrast" width="33%"/>
+    <img src="http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Prince-icecream&layout=compact&theme=2077" width="33%"/>
+  </div>
+  <img src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Prince-icecream&theme=2077" width="100%">
+</div>
+
+---
+
+### 🌐 Connect with Me
+<p align="center">
+  <a href="https://www.linkedin.com/in/md-aman-bhuiyan" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
+  <a href="https://x.com/PrinceIcecream0" target="_blank"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=x&logoColor=white"/></a>
+  <a href="mailto:bhuiyanaman71@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
+</p>
+
+---
+
+⭐ **“Breaking things ethically to make the digital world safer.”**
