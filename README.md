@@ -39,12 +39,10 @@ I’m also into **CTF challenges**, **security automation**, and researching **p
 - 🎯 Featured in the **Halls of Fame** of Google, Adobe, Mozilla, and Xfinity.  
 
 ---
-
 ### 💼 Current Focus
 - 🚀 Advancing in **Automation Testing** and **Security Engineering**  
 - 🤖 Researching **AI-based Phishing & Homoglyph Detection**  
 - 🔍 Building custom tools for **bug bounty automation & recon**  
-
 ---
 
 <div align="center">
