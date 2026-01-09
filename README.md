@@ -73,7 +73,7 @@ I’m also into **CTF challenges**, **security automation**, and researching **p
 
 ---
 
-### 🧪 Problem Solving for SQA Engineering (DSA & Logic)
+### 🧪 Problem Solving 
 
 <p align="center">
   As an <b>SQA Engineer</b>, strong problem-solving skills help me design better  
