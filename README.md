@@ -73,7 +73,7 @@ I’m also into **CTF challenges**, **security automation**, and researching **p
 
 ---
 
-### 🧪 Problem Solving 
+### 🧪 Problem Solving
 
 <p align="center">
   As an <b>SQA Engineer</b>, strong problem-solving skills help me design better  
@@ -86,7 +86,7 @@ I’m also into **CTF challenges**, **security automation**, and researching **p
   <img 
     src="https://leetcard.jacoblin.cool/bhuiyanaman71?theme=dark&font=JetBrains+Mono&ext=contest"
     alt="LeetCode Stats"
-    width="420"
+    width="425"
   />
   &nbsp;&nbsp;&nbsp;
   <img 
