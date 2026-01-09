@@ -86,13 +86,13 @@ I’m also into **CTF challenges**, **security automation**, and researching **p
   <img 
     src="https://leetcard.jacoblin.cool/bhuiyanaman71?theme=dark&font=JetBrains+Mono&ext=contest"
     alt="LeetCode Stats"
-    width="425"
+    width="420"
   />
   &nbsp;&nbsp;&nbsp;
   <img 
     src="https://codeforces-readme-stats.vercel.app/api/card?username=Prince_71&theme=dark"
     alt="Codeforces Stats"
-    width="420"
+    width="410"
   />
 </p>
 
