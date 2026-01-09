@@ -92,7 +92,7 @@ I’m also into **CTF challenges**, **security automation**, and researching **p
   <img 
     src="https://codeforces-readme-stats.vercel.app/api/card?username=Prince_71&theme=dark"
     alt="Codeforces Stats"
-    width="410"
+    width="430"
   />
 </p>
 
