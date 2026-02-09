@@ -76,7 +76,7 @@ My research interests sit at the intersection of **phishing detection, homoglyph
 
 <br><br>
 
-<img align="right" height="280"
+<img align="right" height="260"
 src="https://media.giphy.com/media/L8K62iTDkzGX6/giphy.gif">
 
 
