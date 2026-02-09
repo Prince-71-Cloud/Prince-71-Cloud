@@ -1,6 +1,6 @@
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=700&lines=Hey+👋+I'm+Md.+Aman+Bhuiyan;Cybersecurity+Researcher+%26+Bug+Hunter;Software+Quality+Assurance+Engineer;Automation+%26+Security+Testing+Enthusiast;CTF+Player+%7C+AI+in+Phishing+Detection)](https://git.io/typing-svg)
 
-![Aman's Cybersecurity Banner](cover.png)
+![Aman's Cybersecurity Banner]()
 
 <br>
 
@@ -76,7 +76,7 @@ My research interests sit at the intersection of **phishing detection, homoglyph
 
 <br><br>
 
-<img align="right" alt="hacking" height="280" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/601014116770475.6068beff4640a.gif">
+<img align="right" alt="hacking" height="280" src="/cover.png">
 
 ### 🧑‍💻 Bug Bounty & Research
 - 🏆 Homoglyph Display Name Bypass across major platforms  
