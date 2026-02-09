@@ -1,6 +1,9 @@
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=700&lines=Hey+👋+I'm+Md.+Aman+Bhuiyan;Cybersecurity+Researcher+%26+Bug+Hunter;Software+Quality+Assurance+Engineer;Automation+%26+Security+Testing+Enthusiast;CTF+Player+%7C+AI+in+Phishing+Detection)](https://git.io/typing-svg)
 
-![Aman's Cybersecurity Banner]()
+<p align="center">
+  <img src="Profile.png" alt="Aman Profile" width="250" style="border-radius: 50%;" />
+</p>
+
 
 <br>
 
@@ -63,7 +66,7 @@ My research interests sit at the intersection of **phishing detection, homoglyph
       <img src="https://portswigger.net/content/images/logos/burp-suite-icon.svg" width="48"/><br>Burp Suite
     </td>
     <td align="center" width="96">
-      <img src="https://owasp.org/assets/images/tools/ZAP.png" width="48"/><br>OWASP ZAP
+      <img src="logo.png"/><br>OWASP ZAP
     </td>
     <td align="center" width="96">
       <img src="https://jmeter.apache.org/images/jmeter_square.svg" width="48"/><br>JMeter
@@ -76,7 +79,9 @@ My research interests sit at the intersection of **phishing detection, homoglyph
 
 <br><br>
 
-<img align="right" alt="hacking" height="280" src="/cover.png">
+<img align="right" height="280"
+src="https://media.giphy.com/media/L8K62iTDkzGX6/giphy.gif">
+
 
 ### 🧑‍💻 Bug Bounty & Research
 - 🏆 Homoglyph Display Name Bypass across major platforms  
@@ -98,7 +103,7 @@ My research interests sit at the intersection of **phishing detection, homoglyph
 </p>
 
 <p align="center">
-  <img src="https://codeforces-readme-stats.vercel.app/api/card?username=Prince_71&theme=dark" width="500"/>
+  <img src="https://codeforces-readme-stats.vercel.app/api/card?username=Prince_71&theme=dark" width="420"/>
 </p>
 
 <p align="center">
@@ -137,17 +142,24 @@ My research interests sit at the intersection of **phishing detection, homoglyph
 
 <h3>📫 Connect With Me</h3>
 
-<p>
-  <a href="https://www.linkedin.com/in/bhuiyanaman71">
-    <img src="https://img.icons8.com/color/48/linkedin.png" width="40"/>
+<p align="left">
+  <a href="https://www.linkedin.com/in/bhuiyanaman71" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
   </a>
-  <a href="https://x.com/Prince03371180">
-    <img src="https://img.icons8.com/color/48/twitterx.png" width="40"/>
+  <a href="https://x.com/Prince03371180" target="_blank">
+    <img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white"/>
+  </a>
+  <a href="https://medium.com/@icecream23" target="_blank">
+    <img src="https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white"/>
+  </a>
+  <a href="https://amanbhuiyan-portfolio.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white"/>
   </a>
   <a href="mailto:bhuiyanaman71@gmail.com">
-    <img src="https://img.icons8.com/color/48/gmail.png" width="40"/>
+    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
   </a>
 </p>
+
 
 ---
 
