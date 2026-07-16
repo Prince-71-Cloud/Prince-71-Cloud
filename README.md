@@ -137,6 +137,14 @@ src="https://media.giphy.com/media/L8K62iTDkzGX6/giphy.gif">
 
 ---
 
+<h2 align="center">👾 Pac-Man Commit Maze</h2>
+
+<p align="center">
+  <img src="pacman.svg" alt="Pac-Man contribution animation" width="100%" />
+</p>
+
+---
+
 <h3>📫 Connect With Me</h3>
 
 <p align="left">

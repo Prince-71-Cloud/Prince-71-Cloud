@@ -1,0 +1,241 @@
+name: Pac-Man Commit Maze
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pacman-commit-maze
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.event_name != 'push' || github.event.head_commit.author.name != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate Pac-Man SVG
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+
+          const owner = process.env.GITHUB_REPOSITORY_OWNER;
+          const token = process.env.GITHUB_TOKEN;
+          const now = new Date();
+          const from = new Date(now);
+          from.setDate(from.getDate() - 364);
+
+          const escapeXml = (value) => String(value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&apos;');
+
+          async function loadWeeks() {
+            const query = `
+              query($login: String!, $from: DateTime!, $to: DateTime!) {
+                user(login: $login) {
+                  name
+                  contributionsCollection(from: $from, to: $to) {
+                    contributionCalendar {
+                      totalContributions
+                      weeks {
+                        contributionDays {
+                          date
+                          contributionCount
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `;
+
+            const response = await fetch('https://api.github.com/graphql', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'User-Agent': 'pacman-commit-maze',
+              },
+              body: JSON.stringify({
+                query,
+                variables: {
+                  login: owner,
+                  from: from.toISOString(),
+                  to: now.toISOString(),
+                },
+              }),
+            });
+
+            if (!response.ok) {
+              throw new Error(`GitHub GraphQL request failed with ${response.status}`);
+            }
+
+            const payload = await response.json();
+            const calendar = payload?.data?.user?.contributionsCollection?.contributionCalendar;
+
+            if (!calendar?.weeks?.length) {
+              throw new Error('No contribution calendar data returned');
+            }
+
+            return {
+              name: payload?.data?.user?.name || owner,
+              totalContributions: calendar.totalContributions || 0,
+              weeks: calendar.weeks,
+            };
+          }
+
+          function bucketColor(count, maxCount) {
+            if (!count) return '#1b2430';
+            const bucket = Math.min(4, Math.max(1, Math.ceil((count / Math.max(maxCount, 1)) * 4)));
+            return ['#1b2430', '#144232', '#0f6a50', '#1cbf8d', '#9df25c'][bucket];
+          }
+
+          function buildSvg(data) {
+            const weeks = data.weeks;
+            const cell = 11;
+            const gap = 3;
+            const stride = cell + gap;
+            const marginX = 28;
+            const marginY = 64;
+            const headerHeight = 40;
+            const width = marginX * 2 + (weeks.length * stride) + 220;
+            const height = 220;
+            const maxCount = Math.max(
+              1,
+              ...weeks.flatMap((week) => week.contributionDays.map((day) => day.contributionCount || 0))
+            );
+
+            const cells = weeks.flatMap((week, weekIndex) =>
+              week.contributionDays.map((day, dayIndex) => {
+                const count = day.contributionCount || 0;
+                return [
+                  `<rect x="${marginX + (weekIndex * stride)}" y="${marginY + (dayIndex * stride)}" width="${cell}" height="${cell}" rx="2.5" fill="${bucketColor(count, maxCount)}" opacity="${count ? 1 : 0.72}"/>`,
+                ].join('');
+              })
+            ).join('\n      ');
+
+            const pacmanPath = [
+              `M ${marginX - 18} ${marginY + 11}`,
+              `H ${width - 160}`,
+              `V ${marginY + 28}`,
+              `H ${marginX + 20}`,
+              `V ${marginY + 45}`,
+              `H ${width - 120}`,
+            ].join(' ');
+
+            const title = `Pac-Man Commit Maze`;
+            const subtitle = `${escapeXml(data.name)} has ${data.totalContributions} contributions in the last year`;
+
+            return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeXml(title)}">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#070b10"/>
+      <stop offset="100%" stop-color="#0d141d"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ffd84d"/>
+      <stop offset="100%" stop-color="#ff9f1a"/>
+    </linearGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <rect x="18" y="16" width="${width - 36}" height="${height - 32}" rx="22" fill="none" stroke="#1d2b3a" stroke-width="1.2" opacity="0.95"/>
+
+  <text x="30" y="34" fill="#f8fafc" font-size="20" font-weight="700" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    ${escapeXml(title)}
+  </text>
+  <text x="30" y="54" fill="#8aa0b6" font-size="12.5" font-weight="500" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    ${subtitle}
+  </text>
+
+  <g opacity="0.9">
+    ${cells}
+  </g>
+
+  <g filter="url(#softGlow)">
+    <circle r="18" fill="url(#glow)">
+      <animateMotion dur="12s" repeatCount="indefinite" rotate="auto" keySplines="0.4 0 0.2 1" calcMode="spline" path="${pacmanPath}"/>
+    </circle>
+    <path d="M 0 0 L 18 -10 L 18 10 Z" fill="#0d141d">
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="0;36;0;-36;0" dur="0.22s" repeatCount="indefinite"/>
+      <animateMotion dur="12s" repeatCount="indefinite" rotate="auto" path="${pacmanPath}"/>
+    </path>
+  </g>
+
+  <g transform="translate(${width - 135} ${height - 85})" opacity="0.9">
+    <text x="0" y="0" fill="#8aa0b6" font-size="10" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+      updated from your GitHub activity
+    </text>
+  </g>
+</svg>`;
+          }
+
+          async function main() {
+            let data;
+
+            try {
+              data = await loadWeeks();
+            } catch (error) {
+              data = {
+                name: owner,
+                totalContributions: 0,
+                weeks: Array.from({ length: 53 }, () => ({
+                  contributionDays: Array.from({ length: 7 }, () => ({ contributionCount: 0 })),
+                })),
+              };
+              console.warn(error.message);
+            }
+
+            fs.writeFileSync('pacman.svg', buildSvg(data));
+            console.log('pacman.svg updated');
+          }
+
+          main().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Commit updated Pac-Man art
+        run: |
+          if git diff --quiet -- pacman.svg; then
+            echo "pacman.svg is already up to date"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pacman.svg
+          git commit -m "chore: update pacman contribution art [skip ci]"
+          git push origin HEAD:main
