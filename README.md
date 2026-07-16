@@ -13,6 +13,12 @@
 🎯 Hall of Fame researcher at Google, Mozilla, Adobe & Xfinity.
 💬 Open to collaboration on security research & test automation.
 
+<p align="center">
+  <a href="https://amanbhuiyan-portfolio.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Visit%20My%20Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Visit my portfolio"/>
+  </a>
+</p>
+
 <br><br>
 
 ## 🧠 About Me
