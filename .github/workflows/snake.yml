@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Generate Pac-Man SVG
+      - name: Generate Pac-Man SVGs
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
@@ -107,20 +107,50 @@ jobs:
             };
           }
 
-          function bucketColor(count, maxCount) {
-            if (!count) return '#1b2430';
-            const bucket = Math.min(4, Math.max(1, Math.ceil((count / Math.max(maxCount, 1)) * 4)));
-            return ['#1b2430', '#144232', '#0f6a50', '#1cbf8d', '#9df25c'][bucket];
+          function theme(mode) {
+            if (mode === 'dark') {
+              return {
+                background: '#070b10',
+                border: '#1d2b3a',
+                title: '#f8fafc',
+                subtitle: '#8aa0b6',
+                empty: '#1b2430',
+                colors: ['#1b2430', '#144232', '#0f6a50', '#1cbf8d', '#9df25c'],
+                pacman: 'url(#glowDark)',
+                ghostOne: '#fb7185',
+                ghostTwo: '#38bdf8',
+                ghostFace: '#101a26',
+              };
+            }
+
+            return {
+              background: '#f8fafc',
+              border: '#d6dde6',
+              title: '#0f172a',
+              subtitle: '#475569',
+              empty: '#dbe4ee',
+              colors: ['#dbe4ee', '#9fd3a8', '#5bcf93', '#1faa7a', '#0e8f68'],
+              pacman: 'url(#glowLight)',
+              ghostOne: '#ef476f',
+              ghostTwo: '#118ab2',
+              ghostFace: '#ffffff',
+            };
           }
 
-          function buildSvg(data) {
+          function bucketColor(count, maxCount, palette) {
+            if (!count) return palette.empty;
+            const bucket = Math.min(4, Math.max(1, Math.ceil((count / Math.max(maxCount, 1)) * 4)));
+            return palette.colors[bucket];
+          }
+
+          function buildSvg(data, mode) {
+            const palette = theme(mode);
             const weeks = data.weeks;
             const cell = 11;
             const gap = 3;
             const stride = cell + gap;
             const marginX = 28;
             const marginY = 64;
-            const headerHeight = 40;
             const width = marginX * 2 + (weeks.length * stride) + 220;
             const height = 220;
             const maxCount = Math.max(
@@ -132,7 +162,7 @@ jobs:
               week.contributionDays.map((day, dayIndex) => {
                 const count = day.contributionCount || 0;
                 return [
-                  `<rect x="${marginX + (weekIndex * stride)}" y="${marginY + (dayIndex * stride)}" width="${cell}" height="${cell}" rx="2.5" fill="${bucketColor(count, maxCount)}" opacity="${count ? 1 : 0.72}"/>`,
+                  `<rect x="${marginX + (weekIndex * stride)}" y="${marginY + (dayIndex * stride)}" width="${cell}" height="${cell}" rx="2.5" fill="${bucketColor(count, maxCount, palette)}" opacity="${count ? 1 : 0.92}"/>`,
                 ].join('');
               })
             ).join('\n      ');
@@ -148,17 +178,18 @@ jobs:
 
             const title = `Pac-Man Commit Maze`;
             const subtitle = `${escapeXml(data.name)} has ${data.totalContributions} contributions in the last year`;
+            const glowId = mode === 'dark' ? 'glowDark' : 'glowLight';
 
             return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeXml(title)}">
   <defs>
     <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#070b10"/>
-      <stop offset="100%" stop-color="#0d141d"/>
+      <stop offset="0%" stop-color="${palette.background}"/>
+      <stop offset="100%" stop-color="${mode === 'dark' ? '#0d141d' : '#edf3f9'}"/>
     </linearGradient>
-    <linearGradient id="glow" x1="0" x2="1">
-      <stop offset="0%" stop-color="#ffd84d"/>
-      <stop offset="100%" stop-color="#ff9f1a"/>
+    <linearGradient id="${glowId}" x1="0" x2="1">
+      <stop offset="0%" stop-color="${mode === 'dark' ? '#ffe66b' : '#ffd84d'}"/>
+      <stop offset="100%" stop-color="${mode === 'dark' ? '#ff9f1a' : '#f59e0b'}"/>
     </linearGradient>
     <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
       <feGaussianBlur stdDeviation="8" result="blur"/>
@@ -170,12 +201,12 @@ jobs:
   </defs>
 
   <rect width="100%" height="100%" fill="url(#bg)"/>
-  <rect x="18" y="16" width="${width - 36}" height="${height - 32}" rx="22" fill="none" stroke="#1d2b3a" stroke-width="1.2" opacity="0.95"/>
+  <rect x="18" y="16" width="${width - 36}" height="${height - 32}" rx="22" fill="none" stroke="${palette.border}" stroke-width="1.2" opacity="0.95"/>
 
-  <text x="30" y="34" fill="#f8fafc" font-size="20" font-weight="700" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <text x="30" y="34" fill="${palette.title}" font-size="20" font-weight="700" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
     ${escapeXml(title)}
   </text>
-  <text x="30" y="54" fill="#8aa0b6" font-size="12.5" font-weight="500" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <text x="30" y="54" fill="${palette.subtitle}" font-size="12.5" font-weight="500" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
     ${subtitle}
   </text>
 
@@ -184,17 +215,17 @@ jobs:
   </g>
 
   <g filter="url(#softGlow)">
-    <circle r="18" fill="url(#glow)">
+    <circle r="18" fill="url(#${glowId})">
       <animateMotion dur="12s" repeatCount="indefinite" rotate="auto" keySplines="0.4 0 0.2 1" calcMode="spline" path="${pacmanPath}"/>
     </circle>
-    <path d="M 0 0 L 18 -10 L 18 10 Z" fill="#0d141d">
+    <path d="M 0 0 L 18 -10 L 18 10 Z" fill="${mode === 'dark' ? '#0d141d' : '#ffffff'}">
       <animateTransform attributeName="transform" attributeType="XML" type="rotate" values="0;36;0;-36;0" dur="0.22s" repeatCount="indefinite"/>
       <animateMotion dur="12s" repeatCount="indefinite" rotate="auto" path="${pacmanPath}"/>
     </path>
   </g>
 
   <g transform="translate(${width - 135} ${height - 85})" opacity="0.9">
-    <text x="0" y="0" fill="#8aa0b6" font-size="10" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="0" y="0" fill="${palette.subtitle}" font-size="10" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
       updated from your GitHub activity
     </text>
   </g>
@@ -217,8 +248,9 @@ jobs:
               console.warn(error.message);
             }
 
-            fs.writeFileSync('pacman.svg', buildSvg(data));
-            console.log('pacman.svg updated');
+            fs.writeFileSync('breakout-contribution-graph.svg', buildSvg(data, 'light'));
+            fs.writeFileSync('breakout-contribution-graph-dark.svg', buildSvg(data, 'dark'));
+            console.log('Pac-Man SVGs updated');
           }
 
           main().catch((error) => {
@@ -227,15 +259,16 @@ jobs:
           });
           NODE
 
-      - name: Commit updated Pac-Man art
+      - name: Publish output branch
         run: |
-          if git diff --quiet -- pacman.svg; then
-            echo "pacman.svg is already up to date"
+          if git diff --quiet -- breakout-contribution-graph.svg breakout-contribution-graph-dark.svg; then
+            echo "Pac-Man SVGs are already up to date"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pacman.svg
-          git commit -m "chore: update pacman contribution art [skip ci]"
-          git push origin HEAD:main
+          git switch -C pacman-output
+          git add breakout-contribution-graph.svg breakout-contribution-graph-dark.svg
+          git commit -m "chore: update pacman contribution art [skip ci]" || exit 0
+          git push origin HEAD:pacman-output

@@ -137,13 +137,27 @@ src="https://media.giphy.com/media/L8K62iTDkzGX6/giphy.gif">
 
 ---
 
-<h2 align="center">👾 Pac-Man Commit Maze</h2>
+<br clear="both">
 
-<p align="center">
-  <img src="pacman.svg" alt="Pac-Man contribution animation" width="100%" />
-</p>
+<picture data-importer="pacman">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Prince-71-Cloud/Prince-71-Cloud/pacman-output/breakout-contribution-graph-dark.svg?game=breakout">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Prince-71-Cloud/Prince-71-Cloud/pacman-output/breakout-contribution-graph.svg?game=breakout">
+  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/Prince-71-Cloud/Prince-71-Cloud/pacman-output/breakout-contribution-graph.svg?game=breakout">
+</picture>
 
----
+###
+
+<div data-importer="profile-views" align="center">
+  <img data-importer="profile-views" src="https://visitor-badge.laobi.icu/badge?page_id=Prince-71-Cloud.Prince-71-Cloud&right_color=cornflowerblue"  />
+</div>
+
+###
+
+<div data-importer="border">
+  <img style="100%" src="https://capsule-render.vercel.app/api?type=waving&height=100&section=header&reversal=false&fontSize=70&fontColor=FFFFFF&fontAlign=50&fontAlignY=50&stroke=-&descSize=20&descAlign=50&descAlignY=50&theme=cobalt"  />
+</div>
+
+###
 
 <h3>📫 Connect With Me</h3>
 
